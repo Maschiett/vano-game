@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Вано ловит пиво на свадьбе!</title>
   <style>
     body {
@@ -80,7 +80,7 @@
 </head>
 <body>
   <h1>Вано ловит пиво на свадьбе! 🥂</h1>
-  <div id="score">Выпито бутылок: 0 | Рекорд: <span id="record">0</span></div>
+  <div id="score">Выпито бутылок: 0</div>
   <canvas id="gameCanvas"></canvas>
 
   <div id="speechBubble"></div>
@@ -115,9 +115,8 @@
 
     let beers = [];
     let score = 0;
-    let record = localStorage.getItem("vanoRecord") || 0;
 
-    const scoreDisplay = document.getElementById("score").querySelectorAll("span")[0];
+    const scoreDisplay = document.getElementById("score");
     const burpSound = document.getElementById("burpSound");
     const bgMusic = document.getElementById("bgMusic");
     const speechBubble = document.getElementById("speechBubble");
@@ -183,7 +182,7 @@
         if (dy < 10 && Math.abs(dx) < player.mouthRadius) {
           beers.splice(i, 1);
           score++;
-          scoreDisplay.textContent = `Выпито бутылок: ${score} | Рекорд: ${record}`;
+          scoreDisplay.textContent = `Выпито бутылок: ${score}`;
           burpSound.currentTime = 0;
           try {
             burpSound.play();
@@ -234,15 +233,6 @@
         speechBubble.style.opacity = 0;
       }, 2000);
     }
-
-    // Сохраняем рекорд
-    setInterval(() => {
-      if (score > record) {
-        record = score;
-        localStorage.setItem("vanoRecord", record);
-        scoreDisplay.textContent = `Выпито бутылок: ${score} | Рекорд: ${record}`;
-      }
-    }, 1000);
   </script>
 </body>
 </html>
